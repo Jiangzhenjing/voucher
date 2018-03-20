@@ -1,0 +1,5 @@
+<root>
+    <item name='com.sunesoft.titan.common.utils.ConvertUtil'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

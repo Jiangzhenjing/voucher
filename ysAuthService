@@ -1,0 +1,27 @@
+[33m56e2750[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: commit (merge): Merge branch 'master' of http://101.132.132.38:18088/scm/cxq/titan-invention-voucher
+[33m72f0d04[m HEAD@{1}: commit: 用户接口
+[33mdd94a89[m HEAD@{2}: commit: 关联服务券后，更新用户openid
+[33m0d745a5[m HEAD@{3}: commit: 逻辑修改
+[33ma54385f[m HEAD@{4}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m8487784[m HEAD@{5}: commit: 查询语句。
+[33mc863ee6[m HEAD@{6}: commit: 查询语句。
+[33m20b39ca[m HEAD@{7}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m4108367[m HEAD@{8}: pull --progress --no-stat -v --progress origin master: Merge made by the 'recursive' strategy.
+[33m7548166[m HEAD@{9}: commit: 查询语句。
+[33m1f0aa16[m HEAD@{10}: commit: Merge branch 'master' of http://101.132.132.38:18088/scm/cxq/titan-invention-voucher
+[33m61d17f0[m HEAD@{11}: commit: Merge branch 'master' of http://101.132.132.38:18088/scm/cxq/titan-invention-voucher
+[33me8fbc13[m HEAD@{12}: commit (merge): Merge branch 'master' of http://101.132.132.38:18088/scm/cxq/titan-invention-voucher
+[33m5d79403[m HEAD@{13}: commit: 服务券 对象 接口设计
+[33m02c68b6[m HEAD@{14}: commit: 服务券 对象 接口设计
+[33mae4c899[m HEAD@{15}: commit: 服务券 对象 接口设计
+[33mc50f049[m HEAD@{16}: pull --progress --no-stat -v --progress origin master: Merge made by the 'recursive' strategy.
+[33m1a84a65[m HEAD@{17}: commit: 服务券 对象 接口设计
+[33m20f43a9[m HEAD@{18}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m2cde1da[m HEAD@{19}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m7fbb670[m HEAD@{20}: pull --progress --no-stat -v --progress origin master: Merge made by the 'recursive' strategy.
+[33m95d1d0d[m HEAD@{21}: commit: 服务券 对象 接口设计
+[33ma326025[m HEAD@{22}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m75b8673[m HEAD@{23}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m39f0a89[m HEAD@{24}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m7ad6c12[m HEAD@{25}: pull --progress --no-stat -v --progress origin master: Fast-forward
+[33m64ef772[m HEAD@{26}: commit (initial): Initial Commit

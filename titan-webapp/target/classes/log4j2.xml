@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off">
+    <properties>
+        <property name="LOG_HOME">${web:rootDir}</property>
+        <property name="SERVER_NAME">titan</property>
+        <property name="PRO">pro</property>
+    </properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %-5level %logger [%thread] - %msg%xEx - location: %class{36} %L %M %n"/>
+        </Console>
+        <File name="file" fileName="${LOG_HOME}/${SERVER_NAME}/${PRO}_file.log" append="false">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %-5level %logger [%thread] - %msg%xEx - location: %class{36} %L %M %n"/>
+        </File>
+
+        <RollingFile name="rolling" fileName="${LOG_HOME}/${SERVER_NAME}/${PRO}_rollingfile.log"
+                     filePattern="${LOG_HOME}/${SERVER_NAME}/%d{yyyy-MM}/${PRO}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %-5level %logger [%thread] - %msg%xEx - location: %class{36} %L %M %n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="9"/>
+        </RollingFile>
+        <Async name="fileSyn">
+            <appender-ref ref="file"/>
+            <includeLocation>true</includeLocation>
+        </Async>
+        <Async name="rollingSyn">
+            <appender-ref ref="rolling"/>
+            <includeLocation>true</includeLocation>
+        </Async>
+
+
+        <File name="wxLogFile" fileName="${LOG_HOME}/${SERVER_NAME}/${PRO}_wx.log" append="false">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %-5level %logger [%thread] - %msg%xEx - location: %class{36} %L %M %n"/>
+        </File>
+        <RollingFile name="wxRollingFile" fileName="${LOG_HOME}/${SERVER_NAME}/${PRO}_test_RollingFile.log"
+                     append="true"
+                     filePattern="${test1logDir}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss} %-5level %logger [%thread] - %msg%xEx - location: %class{36} %L %M %n"/>
+            <SizeBasedTriggeringPolicy size="4 MB"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="wxLogger" additivity="TRUE" level="ALL">
+            <AppenderRef ref="wxLogFile" level="ALL"/>
+            <AppenderRef ref="wxRollingFile" level="ALL"/>
+        </Logger>
+
+        <Root level="warn">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="rollingSyn"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

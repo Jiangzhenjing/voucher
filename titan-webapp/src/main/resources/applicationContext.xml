@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <util:properties id="wxConfig" location="classpath:wx.properties"></util:properties>
+    <!-- 开启自动扫包 -->
+    <context:component-scan base-package="com.sunesoft.titan">
+        <!--制定扫包规则，不扫描@Controller注解的JAVA类，其他的还是要扫描  -->
+
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <task:executor id="executor" pool-size="10" queue-capacity="128"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler" proxy-target-class="true"/>
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="taskService" method="testTask" cron="0 0 */1 * * ?"/>
+    </task:scheduled-tasks>
+    <!--<bean name="startQuertz" lazy-init="false" autowire="no"-->
+    <!--class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+    <!--<property name="triggers">-->
+    <!--<list>-->
+    <!--<ref bean="cleanTrigger" />-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="waitForJobsToCompleteOnShutdown" value="true" />-->
+    <!--</bean>-->
+    <!--<bean id="multipartResolver" class="org.springframework.Layout.multipart.commons.CommonsMultipartResolver">-->
+    <!--<property name="maxUploadSize" value="10485760" />-->
+    <!--</bean>-->
+    <!-- 数据源定义,使用c3p0 连接池 -->
+    <bean id="originDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass">
+            <value>${jdbc.driverClassName}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="user">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+        <property name="acquireIncrement">
+            <value>${c3p0.acquireIncrement}</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>${c3p0.initialPoolSize}</value>
+        </property>
+        <property name="minPoolSize">
+            <value>${c3p0.minPoolSize}</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>${c3p0.maxPoolSize}</value>
+        </property>
+        <property name="maxIdleTime">
+            <value>${c3p0.maxIdleTime}</value>
+        </property>
+        <property name="idleConnectionTestPeriod">
+            <value>${c3p0.idleConnectionTestPeriod}</value>
+        </property>
+        <property name="maxStatements">
+            <value>${c3p0.maxStatements}</value>
+        </property>
+        <property name="numHelperThreads">
+            <value>${c3p0.numHelperThreads}</value>
+        </property>
+    </bean>
+    <bean id="exceptionResolver" class="com.sunesoft.titan.exeption.TitanExceptionResolver"></bean>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"
+          p:targetDataSource-ref="originDataSource"/>
+
+    <!-- 如果使用的是Annotation的方式-->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 设置Spring取那个包中查找相应的实体类 -->
+        <property name="packagesToScan">
+            <value>com.sunesoft.titan.*.*</value>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect= ${hibernate.dialect}
+                <!--hibernate.dialect=org.hibernate.dialect.MySQL5Dialect-->
+                hibernate.show_sql=false
+                hibernate.hbm2ddl.auto=update
+                hibernate.format_sql=false
+                hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+                hibernate.release_mode=auto
+                hibernate.connection.isolation=1
+                hibernate.cache.use_query_cache=false
+                hibernate.cache.use_second_level_cache=false
+                hibernate.jdbc.batch_size=25
+                hibernate.jdbc.fetch_size=50
+            </value>
+        </property>
+    </bean>
+
+    <!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
+    <!-- 创建事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <aop:config>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.sunesoft.titan..*ServiceImpl.*(..)) "/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
+    </aop:config>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+
+            <tx:method name="*" propagation="REQUIRED"/>
+            <!-- 以下方法都是可能设计修改的方法，就无法设置为只读 -->
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="change*" propagation="REQUIRED"/>
+            <tx:method name="cancel*" propagation="REQUIRED"/>
+            <tx:method name="import*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="com.sunesoft.titan.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+        <constructor-arg ref="cacheManager"/>
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="2"/>
+        <property name="storedCredentialsHexEncoded" value="true"/>
+    </bean>
+    <!-- Realm实现 -->
+    <bean id="userRealm" class="com.sunesoft.titan.shiro.realm.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="false"/>
+        <property name="authenticationCachingEnabled" value="true"/><!-- 启用身份验证缓存，即缓存AuthenticationInfo信息，默认false -->
+        <property name="authenticationCacheName" value="authenticationCache"/><!-- 缓存AuthenticationInfo信息的缓存名称 -->
+        <property name="authorizationCachingEnabled" value="true"/><!-- 启用授权缓存，即缓存AuthorizationInfo信息，默认false -->
+        <property name="authorizationCacheName" value="authorizationCache"/><!-- 缓存AuthorizationInfo信息的缓存名称 -->
+    </bean>
+
+
+    <!--&lt;!&ndash; 基于Form表单的身份验证过滤器 &ndash;&gt;-->
+    <!--<bean id="weChatAuthenticationFilter" class="com.sunesoft.titan.weChat.shiro.WeChatAuthenticationFilter">-->
+        <!--<property name="redirectUrl" value="/wechat/login"/>-->
+        <!--<property name="hostName" value="http://wx.sunesoft.com/"/>-->
+        <!--<property name="successUrl" value="/wechat/index"/> &lt;!&ndash;指定登录成功后重定向的默认地址（默认是“/”）（如果有上一个地址会自动重定向到该地址）&ndash;&gt;-->
+        <!--&lt;!&ndash; <property name="failureKeyAttribute" value="shiroLoginFailure" />  failureKeyAttribute指定登录失败时的 request属性 key（默认 shiroLoginFailure） &ndash;&gt;-->
+        <!--<property name="loginUrl" value="/wechat/login"/>            &lt;!&ndash; 指定身份验证的登录表单 &ndash;&gt;-->
+        <!--&lt;!&ndash; <property name="loginUrl" value="/loginAction/toLogin"/> &ndash;&gt;            &lt;!&ndash; 指定身份验证的登录表单 &ndash;&gt;-->
+    <!--</bean>-->
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <!-- <property name="loginUrl" value="/loginAction/toLogin"/> -->
+        <property name="filters">
+            <util:map>
+                <!--<entry key="wxAuthc" value-ref="weChatAuthenticationFilter"/>-->
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+                <entry key="forceLogout" value-ref="forceLogoutFilter"/>
+                <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                <!--/wechat/*=wxAuthc-->
+                /login=jCaptchaValidate,authc
+                /voucher/**=authc
+                /404=anon
+                /wx500=anon
+                <!--/dingtalk=weChat-->
+                /logout=logout
+                /jcaptcha*=anon
+                /images/**=anon
+                /portal/**=anon
+                /**=anon
+            </value>
+        </property>
+    </bean>
+
+    <!-- 对静态资源文件的访问  -->
+    <mvc:resources mapping="/**/*.js" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.css" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.png" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.jpg" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.jpeg" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.gif" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.eot" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.ttf" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.woff" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/**/*.woff2" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:resources mapping="/*.ico" location="classpath:/"
+                   cache-period="31556926"/>
+    <mvc:resources mapping="/**/*.pdf" location="classpath:/"
+                   cache-period="31556926"/>
+    <mvc:resources mapping="/**/*.properties" location="classpath:/"
+                   cache-period="31556926"/>
+
+    <mvc:interceptors>
+        <!-- 多个拦截器,顺序执行   -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller   -->
+            <bean class="com.sunesoft.titan.interceptor.PermissionInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller   -->
+            <bean class="com.sunesoft.titan.menus.MenuShiroInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller   -->
+            <bean class="com.sunesoft.titan.mock.DefaultMockInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller   -->
+            <bean class="com.sunesoft.titan.interceptor.LoginDealInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller   -->
+            <bean class="com.sunesoft.titan.voucher.application.querys.staticCache.SetRegionInfoInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

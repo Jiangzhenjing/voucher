@@ -1,0 +1,773 @@
+a:hover{
+    text-decoration: underline;
+}
+ul{
+    margin:0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+input,select,textarea,button{
+    border-radius: 3px;
+}
+.vou-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background: #2c8a68;
+}
+.vou-top ul{
+    display: flex;
+    flex-direction: row;
+    line-height: 50px;
+}
+.vou-top ul a{
+    padding: 3px 12px;
+    margin: 12px;
+    color: #fff;
+    font-size: 16px;
+}
+.vou-top ul a:hover{
+    text-decoration: none;
+}
+.vou-title{
+    margin: 0 10px;
+    color: #FFEB3B;
+    font-size: 16px;
+    width: 260px;
+}
+.vou-top-left{
+    flex-grow: 1;
+}
+.vou-top-left li.active{
+    height: 50px;
+    background: #35a97f;
+}
+.vou-top-right{
+    margin-right: 10px;
+}
+.vou-top-right li{
+    padding:0 3px;
+    color: #efeb3b;
+    font-size: 14px;
+}
+.vou-top-right li a{
+    font-size: 14px;
+}
+.vou-top ul.vou-top-right a{
+    padding: 3px 0;
+    margin: 12px 0;
+}
+.vou-centent{
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.vou-left{
+    width: 140px;
+    height: 100%;
+    background: #9a9a9a;
+}
+.vou-left span{
+    display: inline-block;
+    padding-left: 20px;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
+}
+.vou-left ul{
+    padding: 10px 0 0 0;
+}
+.vou-left ul li a{
+    display: block;
+    padding: 10px 0 10px 40px;
+    color: #fff;
+}
+.vou-left ul li.active a{
+    color: #2c8a68;
+    background: #fff;
+}
+.vou-centent .wrapper-content{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+}
+.vou-oper{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8e8e8;
+    align-items: center;
+    padding: 7px 0px;
+}
+.vou-search-mor{
+    display: flex;
+    align-items: center;
+}
+.vou-search-mor>div{
+    margin: 0 5px;
+}
+.vou-search-add {
+    display: none;
+}
+.vou-search-add span,.vou-search-mor span{
+    margin-right: 10px;
+}
+.vou-search-mor>div input{
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+.vou-search-mor select{
+    padding: 4px 5px;
+    border: 1px solid #ddd;
+}
+.vou-search-mor button{
+    margin-right: 10px;
+    padding: 0 15px;
+    height: 30px;
+    line-height: 1px;
+    color: #fff;
+    border: 1px solid #4caf50;
+    background: #4caf50;
+}
+
+/*表格样式修改*/
+.vou-table-container{
+    margin-top: 20px;
+}
+.vou-table-container .ui-jqgrid .ui-jqgrid-htable th div,.vou-table-container .ui-jqgrid tr.jqgrow td{
+    padding: 12px 6px;
+    text-align: center;
+}
+.vou-table-container .ui-jqgrid tr.jqgrow td a{
+    margin: 0 10px;
+    color: #337ab7;
+}
+.vou-table-container .ui-jqgrid tr.jqgrow td a:hover{
+    text-decoration: underline;
+}
+.vou-table-container .ui-jqgrid tr.jqgrow td a i{
+    margin-right: 5px;
+    font-size: 12px;
+}
+.vou-table-container .ui-widget-content{
+    color: #666;
+}
+
+/*弹窗表单样式*/
+.form-group {
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 20px;
+    align-items: center;
+    font-size: 12px;
+    color: #999;
+}
+.form-group td input{
+    margin: 0px;
+    width: 60px;
+    border: 1px solid #ddd;
+}
+.form-group td {
+    padding:6px;
+    border: 1px solid #eee;
+}
+.vou-tr-bt{
+    height: 30px;
+    background: #f2f2f2;
+    color: #666;
+    font-weight: bold;
+}
+.vou-eval-div{
+    width: 100px;
+}
+.form-group span{
+    width: 8px;
+    color: red;
+}
+.form-group label{
+    width: 120px;
+    font-size: 14px;
+    color: #666;
+}
+.form-group label.vou-eval-label{
+    display: flex;
+    align-items: center;
+    width: 100px;
+}
+.form-group input,.form-group select{
+    margin: 0 10px;
+    width: 220px;
+}
+.form-group input[type='radio']{
+    margin: 0 5px 0 0;
+    width: initial;
+}
+.form-group select{
+    padding: 6px 0;
+    border: 1px solid #ddd;
+}
+
+/*服务券详情*/
+.vou-deta-infor{
+    margin-bottom: 20px;
+}
+.vou-perfect-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    background: #f6f6f6;
+}
+.vou-perfect-title span{
+    font-size: 16px;
+    color: #2c8a68;
+}
+.vou-perfect-title a{
+    display: inline-block;
+    padding: 0px 6px;
+    margin-left: 10px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #fff;
+    background: #4caf50;
+    border: 1px solid #4caf50;
+    border-radius: 3px;
+}
+.vou-deta-title{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid #eee;
+}
+.vou-deta-title strong{
+    margin:0 10px;
+    font-size: 16px;
+    color: #333;
+}
+.vou-deta-infor ul{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.vou-deta-infor ul li{
+    display: flex;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    width: 33.33%;
+}
+.vou-conpageft .vou-custo-form.vou-deta-infor ul li{
+    padding:15px 20px;
+    width: 50%;
+}
+.vou-custo-form.vou-deta-infor ul li.vou-custo-firstli{
+    width: 100%;
+}
+.vou-deta-infor ul li button{
+    margin-left: 84px;
+    padding: 5px 16px;
+    color: #fff;
+    background: #4caf50;
+    border: 1px solid #4caf50;
+}
+.vou-perfect.vou-deta-infor ul li{
+    width: 50%;
+}
+.vou-perfect.vou-deta-infor ul li select{
+    height: 30px;
+    min-width: 168px;
+    border: 1px solid #dadada;
+}
+.vou-deta-infor ul li.address{
+    width: 100%;
+}
+.vou-deta-infor ul li em{
+    display: inline-block;
+    width: 8px;
+    color: red;
+}
+.vou-eval{
+    margin: 10px;
+    border: 1px solid #f2f2f2;
+}
+.vou-eval strong{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 36px;
+    background: #f2f2f2;
+}
+.vou-eval strong span{
+    font-weight: 100;
+    color: #FF9800;;
+}
+.vou-eval1{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.vou-eval1 span{
+    width: 70px;
+    color: #333;
+}
+.vou-eval1 p{
+    flex-grow: 1;
+}
+.form-group.vou-form-group{
+    align-items: flex-start;
+}
+.vou-form1{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 180px;
+}
+.vou-form1 label input{
+    margin: 0;
+    width: initial;
+}
+.vou-form1 label{
+    font-weight: 100;
+}
+
+/*登录*/
+.vou-sign-top{
+    height: 50px;
+    line-height: 50px;
+    background: #2c8a68;
+    color: #fff;
+    font-size: 22px;
+}
+.vou-sign-top p{
+    width: 1000px;
+    margin: 0 auto;
+}
+.vou-sign-centent{
+    background: #fff;
+    height: 100%;
+}
+.vou-sign{
+    box-sizing: border-box;
+    padding: 20px 20px 120px;
+    margin: 20px auto;
+    width: 1000px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+}
+.vou-sign-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.vou-sign-title strong{
+    font-size: 20px;
+}
+.vou-sign-title ul{
+    display: flex;
+}
+.vou-sign-title ul li{
+    margin: 0 10px;
+}
+.vou-sign-form form{
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 500px;
+}
+.vou-sign-form form span{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.vou-sign-form form span label{
+    margin:0;
+    width: 90px;
+}
+.vou-sign-form form span input{
+    padding: 5px;
+    width: 320px;
+    height: 32px;
+    border: 1px solid #dadada;
+}
+.vou-sign-form form span input.vou-sign-yz{
+    width: 200px;
+}
+a.vou-button{
+    margin-left: 20px;
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #dadada;
+    border-radius: 3px;
+    background: #f2f2f2;
+}
+.vou-yz-img{
+    margin-left: 20px;
+    width: 100px;
+    height: 32px;
+    border: 1px solid #dadada;
+}
+.vou-sign-btn{
+    margin-left: 92px;
+}
+.vou-sign-btn button{
+    margin-right: 10px;
+    padding: 4px 14px;
+    background: #4caf50;
+    border: 1px solid #4caf50;
+    color: #fff;
+}
+.vou-sign-explain{
+    margin: 60px 0;
+}
+.vou-sign-explain strong{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.vou-sign-footer{
+    position: fixed;
+    text-align: center;
+}
+.vou-pro-ul li span{
+    display: inline-block;
+    width: 80px;
+}
+.vou-perfect .vou-pro-ul li span{
+    width: 150px;
+}
+.vou-pro-ul li span em{
+    margin-right: 5px;
+    color: red;
+}
+.vou-pro-ul li input{
+    padding: 0 5px;
+    height: 30px;
+    border: 1px solid #dadada;
+}
+.vou-statb{
+    display: inline-block;
+    margin: 40px auto;
+    width: 1000px;
+    height: 500px;
+}
+
+/*用户登录*/
+.vou-conpageft {
+    width: 100%;
+    margin:0 auto 40px;
+}
+.vou-conpage-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.vou-conpage-title strong{
+    margin-right: 20px;
+    font-size: 16px;
+    color: #333;
+}
+.vou-conpage-type{
+    flex-grow: 1;
+}
+.vou-conpage-title>div{
+    font-size: 12px;
+}
+.vou-conpage-title em{
+    font-style: inherit;
+    color: red;
+}
+.vou-conpage-title i{
+    font-size: 12px;
+    color: red;
+}
+.vou-conul-sm{
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #999999;
+}
+.vou-conul-sm span{
+    margin-right: 10px;
+}
+.vou-conpageft ul li{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.vou-conpageft ul li h3{
+    color: #333333;
+}
+.vou-conul-deta{
+    display: flex;
+    justify-content: space-between;
+}
+.vou-conul-jso>div{
+    display: flex;
+    padding:3px 0;
+}
+.vou-conul-jso>div span{
+    margin-right: 5px;
+}
+.vou-conul-jso>div div{
+    margin-right: 15px;
+}
+.vou-conul-jso{
+    margin-right: 40px;
+}
+.vou-conul-cz{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 0 20px;
+}
+.vou-conul-cz span{
+    display: flex;
+}
+.vou-conul-cz span i{
+    font-size: 14px;
+    color: #ffbe00;
+}
+.vou-conul-cz button {
+    margin:0 10px 0 20px;
+    height: 28px;
+    width: 60px;
+    color: #fff;
+    background: #4caf50;
+    border: 1px solid #4caf50;
+}
+.vou-conft-cz{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+.vou-conft-cz span{
+    font-size: 12px;
+    color: #FF9800;
+}
+.vou-conft-cz p{
+    color: red;
+}
+.vou-conft-cz strong{
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333333;
+}
+.vou-conft-cz>div{
+    font-size: 12px;
+}
+.vou-conft-cz>div em{
+    margin: 0 2px;
+    font-style: inherit;
+    color: red;
+}
+.vou-conft-cz>div a{
+    display: inline-block;
+    padding: 2px 6px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #fff;
+    background: #4caf50;
+    border: 1px solid #4caf50;
+    border-radius: 3px;
+}
+.vou-conft-cz>div a.vou-activat{
+    background: #FF5722;
+    border: 1px solid #ff5722;
+}
+.vou-conpageft .vou-deta-infor ul li{
+    flex-direction: row;
+    margin: 0;
+    padding: 15px 0;
+    border: none;
+}
+.vou-conpageft .vou-deta-infor ul li.vou-conpg-width{
+    width: 100%;
+}
+.vou-select-pro{
+    display: flex;
+    flex-direction: column;
+}
+.vou-select-pro li{
+    margin: 20px 40px;
+    color: #999999;
+}
+.vou-select-pro li span{
+    display: inline-block;
+    width: 90px;
+    color: #666;
+}
+.vou-select-pro li em{
+    margin-left: 10px;
+    font-style: inherit;
+    font-size: 12px;
+    color: red;
+}
+.form-group.vou-form-group{
+    align-items: flex-start;
+}
+.form-group textarea {
+    margin: 0px 10px;
+    width: 222px;
+    border: 1px solid rgb(229, 230, 231);
+    height: 60px;
+    resize: none;
+}
+.form-group textarea.vou-eval-tarea{
+    margin-left: 0px;
+    width: 364px;
+}
+#Js_form .has-feedback label~.form-control-feedback{
+    top:0;
+}
+/*首页*/
+.vou-banner-div{
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+}
+.vou-index-title{
+    position: absolute;
+    z-index: 1;
+    top: 240px;
+    left: 50%;
+    margin-left: -320px;
+    font-size: 40px;
+    color: #46687a;
+    text-shadow: 0px 2px 1px #fff;
+}
+.vou-index-ul{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto;
+    width: 724px;
+    height: 139px;
+}
+.vou-btn_div a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.vou-btn_icon{
+    margin-bottom: 10px;
+    width: 100px;
+    height: 101px;
+}
+.reg_icon{
+    background: url(../images/sprite.png) 0 -3px;
+}
+.reg_icon:hover{
+    background: url(../images/sprite.png) 0 -103px;
+}
+.customer_icon {
+    background: url(../images/sprite.png) -100px -3px;
+}
+.customer_icon:hover{
+    background: url(../images/sprite.png) -100px -103px;
+}
+.service_icon {
+    background: url(../images/sprite.png) -200px -3px;
+}
+.service_icon:hover{
+    background: url(../images/sprite.png) -200px -103px;
+}
+.admin_iocn {
+    background: url(../images/sprite.png) -300px -3px;
+}
+.admin_iocn:hover{
+    background: url(../images/sprite.png) -300px -103px;
+}
+.vou-index-ts{
+    text-align: center;
+    margin-top: 26px;
+}
+.vou-index-footer{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+.vou-index-tspan{
+    margin-left: 50px;
+}
+.vou-index-tspan i{
+    margin: 0 5px;
+    color: #FFC107;;
+}
+.vou-wapper #Js_form{
+    margin: 20px;
+}
+.vou-index-ts span a{
+    color: #0087d2;
+}
+.vou-span-line{
+    color: #cccccc;
+}
+.vou-ptr-bz{
+    display: flex;
+    align-self: flex-start;
+}
+.vou-ptr-bz textarea{
+    margin-left: 7px;
+    width: 400px;
+    height: 60px;
+    border: 1px solid #dadada;
+    resize: none;
+}
+
+/*打印页面*/
+.vou-printlist{
+    margin: 20px auto;
+    padding: 19px;
+    width: 794px;
+    height: 1123px;
+    border: 1px solid #eee;
+}
+.vou-print {
+    display: inline-block;
+    width: 100%;
+    clear: both;
+}
+.vou-print button {
+    float: right;
+    margin: 10px;
+    padding: 3px 12px;
+    font-size: 12px;
+    border: 1px solid #f2f2f2;
+}
+.vou-print-title{
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+.vou-print-time{
+    margin-right: 10px;
+    text-align: right;
+    font-size: 12px;
+}
+.vou-print-table{
+    width: 100%;
+}
+.vou-print-table td{
+    padding: 8px;
+    border: 1px solid #dadada;
+}
